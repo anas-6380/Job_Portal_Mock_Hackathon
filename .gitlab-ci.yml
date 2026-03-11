@@ -10,7 +10,11 @@ build-backend:
     - echo "Building ASP.NET Core Web API..."
     - cd JobPortal.API
     - dotnet restore
-    - dotnet build --configuration Release --no-restore
+    - dotnet publish -c Release -o ./publish
+  artifacts:
+    paths:
+      - JobPortal.API/publish/
+    expire_in: 1 week
 
 # === FRONTEND (Angular) ===
 build-frontend:
