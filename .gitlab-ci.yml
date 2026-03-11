@@ -1,0 +1,27 @@
+stages:
+  - build
+  - test
+
+# === BACKEND (ASP.NET Core) ===
+build-backend:
+  stage: build
+  image: mcr.microsoft.com/dotnet/sdk:8.0
+  script:
+    - echo "Building ASP.NET Core Web API..."
+    - cd JobPortal.API
+    - dotnet restore
+    - dotnet build --configuration Release --no-restore
+
+# === FRONTEND (Angular) ===
+build-frontend:
+  stage: build
+  image: node:18
+  script:
+    - echo "Building Angular App..."
+    - cd jobportal-client
+    - npm ci
+    - npm run build
+  artifacts:
+    paths:
+      - jobportal-client/dist/
+    expire_in: 1 week
