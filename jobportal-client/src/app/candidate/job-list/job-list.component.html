@@ -1,0 +1,63 @@
+<div class="container">
+  <!-- Search & Filters Bar -->
+  <div class="search-bar">
+    <div class="search-field">
+      <span class="material-icons-outlined">search</span>
+      <input type="text" [(ngModel)]="search" placeholder="Job title or keyword" (keyup.enter)="onSearch()">
+    </div>
+    <div class="search-field">
+      <span class="material-icons-outlined">location_on</span>
+      <input type="text" [(ngModel)]="location" placeholder="Location" (keyup.enter)="onSearch()">
+    </div>
+    <select [(ngModel)]="jobType" (change)="onSearch()" class="filter-select">
+      <option value="">All Types</option>
+      <option value="Full time">Full time</option>
+      <option value="Part time">Part time</option>
+      <option value="Contract">Contract</option>
+      <option value="Internship">Internship</option>
+      <option value="Remote">Remote</option>
+    </select>
+    <button class="btn btn-primary" (click)="onSearch()">Search</button>
+  </div>
+
+  <!-- Results header -->
+  <div class="results-header">
+    <h2>Recommended Jobs <span class="count-badge">{{ totalCount }}</span></h2>
+    <span class="text-secondary">Sort by: <strong>Latest</strong></span>
+  </div>
+
+  <!-- Loading -->
+  @if (loading) {
+  <div class="loader">
+    <div class="spinner"></div>
+  </div>
+  }
+
+  <!-- Jobs Grid -->
+  @if (!loading && jobs.length > 0) {
+  <div class="jobs-grid">
+    @for (job of jobs; track job.id; let i = $index) {
+    <app-job-card [job]="job" [colorVariant]="getColor(i)" />
+    }
+  </div>
+  }
+
+  @if (!loading && jobs.length === 0) {
+  <div class="empty-state">
+    <span class="material-icons-outlined">work_off</span>
+    <h3>No jobs found</h3>
+    <p>Try adjusting your search filters</p>
+  </div>
+  }
+
+  <!-- Pagination -->
+  @if (totalPages > 1) {
+  <div class="pagination">
+    <button (click)="goToPage(page - 1)" [disabled]="page === 1">← Prev</button>
+    @for (p of [].constructor(totalPages); track $index) {
+    <button [class.active]="page === $index + 1" (click)="goToPage($index + 1)">{{ $index + 1 }}</button>
+    }
+    <button (click)="goToPage(page + 1)" [disabled]="page === totalPages">Next →</button>
+  </div>
+  }
+</div>

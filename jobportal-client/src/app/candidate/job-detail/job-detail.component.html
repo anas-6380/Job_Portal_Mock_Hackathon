@@ -1,0 +1,115 @@
+<div class="container">
+  @if (loading) {
+  <div class="loader">
+    <div class="spinner"></div>
+  </div>
+  }
+
+  @if (job) {
+  <div class="detail-layout">
+    <div class="detail-main">
+      <div class="back-link">
+        <a routerLink="/jobs">← Back to Jobs</a>
+      </div>
+
+      <div class="job-header-card card">
+        <div class="job-meta">
+          <div class="company-logo-lg">{{ job.companyName.charAt(0) }}</div>
+          <div>
+            <span class="company-text">{{ job.companyName }}</span>
+            <h1>{{ job.title }}</h1>
+            <div class="job-tags">
+              @if (job.jobType) { <span class="tag tag-blue">{{ job.jobType }}</span> }
+              @if (job.location) { <span class="tag">📍 {{ job.location }}</span> }
+              @if (job.experienceRequired !== null && job.experienceRequired !== undefined) {
+              <span class="tag tag-purple">{{ job.experienceRequired }}+ yrs exp</span>
+              }
+            </div>
+          </div>
+        </div>
+        <div class="salary-section">
+          <div class="salary-amount">{{ salaryDisplay }}</div>
+          <span class="text-muted">per year</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Job Description</h3>
+        <div class="description-content">
+          {{ job.description }}
+        </div>
+      </div>
+    </div>
+
+    <div class="detail-sidebar">
+      <div class="card apply-card">
+        @if (applied) {
+        <div class="alert alert-success">✅ Application submitted successfully!</div>
+        } @else if (showApplyForm) {
+        <h3>Apply for this job</h3>
+        @if (applyError) {
+        <div class="alert alert-error">{{ applyError }}</div>
+        }
+        <form [formGroup]="applyForm" (ngSubmit)="submitApplication()">
+          @if (resumes.length > 0) {
+          <div class="form-group">
+            <label>Select Resume</label>
+            <select formControlName="resumeId" class="form-control">
+              <option [ngValue]="null">-- No resume --</option>
+              @for (r of resumes; track r.id) {
+              <option [ngValue]="r.id">{{ r.fileName }}</option>
+              }
+            </select>
+          </div>
+          }
+          <div class="form-group">
+            <label>Cover Letter (Optional)</label>
+            <textarea formControlName="coverLetter" class="form-control" rows="5"
+              placeholder="Why are you a good fit?"></textarea>
+          </div>
+          <button type="submit" class="btn btn-accent btn-lg" style="width:100%" [disabled]="applying">
+            {{ applying ? 'Submitting...' : 'Submit Application' }}
+          </button>
+        </form>
+        } @else {
+        <h3>Interested?</h3>
+        <p class="text-secondary" style="margin: 12px 0">Apply now and get noticed by the employer</p>
+        <button class="btn btn-primary btn-lg" style="width:100%" (click)="openApplyForm()">
+          Apply Now
+        </button>
+        }
+      </div>
+
+      <div class="card info-card">
+        <h4>Company Info</h4>
+        <div class="info-row">
+          <span class="info-label">Company</span>
+          <span>{{ job.companyName }}</span>
+        </div>
+        @if (job.companyLocation) {
+        <div class="info-row">
+          <span class="info-label">Location</span>
+          <span>{{ job.companyLocation }}</span>
+        </div>
+        }
+        @if (job.companyWebsite) {
+        <div class="info-row">
+          <span class="info-label">Website</span>
+          <a [href]="job.companyWebsite" target="_blank" class="link">{{ job.companyWebsite }}</a>
+        </div>
+        }
+        <div class="info-row">
+          <span class="info-label">Posted</span>
+          <span>{{ job.createdAt | date:'mediumDate' }}</span>
+        </div>
+        @if (job.expiresAt) {
+        <div class="info-row">
+          <span class="info-label">Expires</span>
+          <span>{{ job.expiresAt | date:'mediumDate' }}</span>
+        </div>
+        }
+      </div>
+    </div>
+  </div>
+  }
+</div>

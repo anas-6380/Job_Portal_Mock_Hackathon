@@ -1,0 +1,41 @@
+<div [class]="cardClass">
+  <div class="card-header">
+    <span class="date-badge">{{ formattedDate }}</span>
+    <button class="bookmark-btn">
+      <span class="material-icons-outlined">bookmark_border</span>
+    </button>
+  </div>
+
+  <div class="card-body">
+    <div class="company-row">
+      <span class="company-name">{{ job.companyName }}</span>
+      <div class="company-logo">{{ job.companyName.charAt(0) }}</div>
+    </div>
+
+    <h3 class="job-title">
+      <a [routerLink]="['/jobs', job.id]">{{ job.title }}</a>
+    </h3>
+
+    <div class="tags">
+      @if (job.jobType) {
+        <span class="tag">{{ job.jobType }}</span>
+      }
+      @if (job.experienceRequired !== null && job.experienceRequired !== undefined) {
+        <span class="tag">{{ job.experienceRequired }}+ yrs</span>
+      }
+      @if (job.location) {
+        <span class="tag">{{ job.location }}</span>
+      }
+    </div>
+  </div>
+
+  <div class="card-footer">
+    <div class="salary">
+      <strong>{{ salaryDisplay }}</strong>
+      @if (job.companyLocation) {
+        <span class="location-text">{{ job.companyLocation }}</span>
+      }
+    </div>
+    <a [routerLink]="['/jobs', job.id]" class="btn btn-primary btn-sm">Details</a>
+  </div>
+</div>

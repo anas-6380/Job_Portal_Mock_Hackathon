@@ -1,0 +1,61 @@
+<nav class="navbar">
+  <div class="nav-container">
+    <a routerLink="/jobs" class="nav-brand">
+      <span class="brand-icon">💼</span>
+      <span class="brand-text">JobPortal</span>
+    </a>
+
+    <div class="nav-links" [class.active]="menuOpen">
+      <a routerLink="/jobs" class="nav-link">Find Jobs</a>
+
+      @if (auth.isLoggedIn && auth.userRole === 'Candidate') {
+      <a routerLink="/candidate/dashboard" class="nav-link">Dashboard</a>
+      <a routerLink="/candidate/applications" class="nav-link">My Applications</a>
+      <a routerLink="/candidate/resumes" class="nav-link">Resumes</a>
+      }
+
+      @if (auth.isLoggedIn && auth.userRole === 'Employer') {
+      <a routerLink="/employer/dashboard" class="nav-link">Dashboard</a>
+      <a routerLink="/employer/manage-jobs" class="nav-link">My Jobs</a>
+      <a routerLink="/employer/create-job" class="nav-link">Post Job</a>
+      }
+
+      @if (auth.isLoggedIn && auth.userRole === 'Admin') {
+      <a routerLink="/admin/dashboard" class="nav-link">Dashboard</a>
+      <a routerLink="/admin/users" class="nav-link">Users</a>
+      <a routerLink="/admin/jobs" class="nav-link">Jobs</a>
+      <a routerLink="/admin/applications" class="nav-link">Applications</a>
+      }
+    </div>
+
+    <div class="nav-actions">
+      @if (!auth.isLoggedIn) {
+      <a routerLink="/login" class="btn btn-outline btn-sm">Login</a>
+      <a routerLink="/register" class="btn btn-primary btn-sm">Sign Up</a>
+      } @else {
+      <div class="user-menu">
+        <div class="user-avatar" (click)="toggleMenu()">
+          {{ auth.currentUser?.firstName?.charAt(0) }}{{ auth.currentUser?.lastName?.charAt(0) }}
+        </div>
+        <div class="dropdown-menu" [class.show]="menuOpen">
+          <div class="dropdown-header">
+            <strong>{{ auth.currentUser?.firstName }} {{ auth.currentUser?.lastName }}</strong>
+            <span class="role-badge">{{ auth.userRole }}</span>
+          </div>
+          <a [routerLink]="getDashboardLink()" class="dropdown-item" (click)="menuOpen = false">
+            <span class="material-icons-outlined">dashboard</span> Dashboard
+          </a>
+          @if (auth.userRole === 'Candidate') {
+          <a routerLink="/candidate/profile" class="dropdown-item" (click)="menuOpen = false">
+            <span class="material-icons-outlined">person</span> Profile
+          </a>
+          }
+          <button class="dropdown-item logout" (click)="logout()">
+            <span class="material-icons-outlined">logout</span> Logout
+          </button>
+        </div>
+      </div>
+      }
+    </div>
+  </div>
+</nav>

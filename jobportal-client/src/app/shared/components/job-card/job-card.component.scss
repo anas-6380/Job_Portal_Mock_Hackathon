@@ -1,0 +1,132 @@
+.job-card {
+  background: var(--bg-white);
+  border-radius: var(--border-radius-lg);
+  border: 1px solid var(--border-color);
+  padding: 20px;
+  transition: var(--transition);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  &:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-3px);
+  }
+
+  &.card-green {
+    background: linear-gradient(135deg, #f0fdf4, #ecfdf5);
+    border-color: #bbf7d0;
+  }
+
+  &.card-blue {
+    background: linear-gradient(135deg, #eff6ff, #dbeafe);
+    border-color: #bfdbfe;
+  }
+
+  &.card-purple {
+    background: linear-gradient(135deg, #faf5ff, #f3e8ff);
+    border-color: #e9d5ff;
+  }
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.date-badge {
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  background: rgba(0, 0, 0, 0.05);
+  color: var(--text-secondary);
+}
+
+.bookmark-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--text-muted);
+  padding: 4px;
+  border-radius: 6px;
+  transition: var(--transition);
+
+  &:hover {
+    color: var(--accent-blue);
+    background: rgba(67, 97, 238, 0.1);
+  }
+
+  .material-icons-outlined {
+    font-size: 1.2rem;
+  }
+}
+
+.company-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.company-name {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.company-logo {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+.job-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  line-height: 1.3;
+
+  a {
+    color: var(--text-primary);
+    transition: var(--transition);
+
+    &:hover {
+      color: var(--accent-blue);
+    }
+  }
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto;
+  padding-top: 12px;
+  border-top: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.salary {
+  strong {
+    display: block;
+    font-size: 0.95rem;
+    color: var(--text-primary);
+  }
+
+  .location-text {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+  }
+}

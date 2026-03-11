@@ -1,0 +1,131 @@
+.auth-page {
+  min-height: calc(100vh - 70px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  background: var(--bg-primary);
+}
+
+.auth-container {
+  display: grid;
+  grid-template-columns: 1fr 1.3fr;
+  max-width: 1060px;
+  width: 100%;
+  background: var(--bg-white);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+}
+
+.auth-left {
+  background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
+  color: #fff;
+  padding: 48px;
+  display: flex;
+  align-items: center;
+}
+
+.auth-branding {
+  h1 {
+    font-size: 2rem;
+    margin-bottom: 16px;
+  }
+
+  p {
+    font-size: 1rem;
+    opacity: 0.8;
+    line-height: 1.6;
+    margin-bottom: 32px;
+  }
+}
+
+.features {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.feature {
+  font-size: 0.9rem;
+  opacity: 0.9;
+}
+
+.auth-right {
+  padding: 40px;
+  overflow-y: auto;
+  max-height: 90vh;
+}
+
+.auth-form-container {
+  h2 {
+    font-size: 1.5rem;
+    margin-bottom: 4px;
+  }
+
+  .subtitle {
+    color: var(--text-secondary);
+    margin-bottom: 24px;
+    font-size: 0.9rem;
+  }
+}
+
+.role-selector {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.role-btn {
+  padding: 12px;
+  border: 2px solid var(--border-color);
+  border-radius: var(--border-radius-sm);
+  background: var(--bg-white);
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: var(--transition);
+  cursor: pointer;
+
+  &.active {
+    border-color: var(--accent-blue);
+    background: rgba(67, 97, 238, 0.05);
+    color: var(--accent-blue);
+  }
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.auth-footer {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+
+  a {
+    color: var(--accent-blue);
+    font-weight: 600;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .auth-container {
+    grid-template-columns: 1fr;
+  }
+
+  .auth-left {
+    display: none;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+}
